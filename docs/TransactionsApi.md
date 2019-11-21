@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**payinTransaction**](TransactionsApi.md#payinTransaction) | **POST** /transactions/{Transaction ID}/payin | Creates a fake payin for transaction
 [**payoutTransaction**](TransactionsApi.md#payoutTransaction) | **POST** /transactions/{Transaction ID}/payout | Creates a fake payout for transaction
 [**postTransactions**](TransactionsApi.md#postTransactions) | **POST** /transactions | Creates a new transaction
-[**createAndFundTransactions**](TransactionsApi.md#createAndFundTransactions) | **POST** /transactions | Creates and funds a new transaction
+[**createAndFundTransactions**](TransactionsApi.md#createAndFundTransactions) | **POST** /transactions/create_and_fund | Creates and funds a new transaction
 [**validateTransactions**](TransactionsApi.md#validateTransactions) | **POST** /transactions/validate | Validates a transaction payload
 
 
@@ -510,7 +510,7 @@ if (e.isValidationError()) {
  System.out.println(result);
  System.err.println("WARN: Validation error occurred when calling the endpoint");
 } else {
- System.err.println("Exception when calling TransactionsApi#postTransactions");
+ System.err.println("Exception when calling TransactionsApi#createAndFundTransactions");
  e.printStackTrace();
 }
 }
