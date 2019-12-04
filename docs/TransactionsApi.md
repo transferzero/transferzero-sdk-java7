@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**payinTransaction**](TransactionsApi.md#payinTransaction) | **POST** /transactions/{Transaction ID}/payin | Creates a fake payin for transaction
 [**payoutTransaction**](TransactionsApi.md#payoutTransaction) | **POST** /transactions/{Transaction ID}/payout | Creates a fake payout for transaction
 [**postTransactions**](TransactionsApi.md#postTransactions) | **POST** /transactions | Creates a new transaction
-[**createAndFundTransactions**](TransactionsApi.md#createAndFundTransactions) | **POST** /transactions/create_and_fund | Creates and funds a new transaction
+[**createAndFundTransaction**](TransactionsApi.md#createAndFundTransaction) | **POST** /transactions/create_and_fund | Creates and funds a new transaction
 [**validateTransactions**](TransactionsApi.md#validateTransactions) | **POST** /transactions/validate | Validates a transaction payload
 
 
@@ -102,7 +102,7 @@ apiClient.setApiSecret("<secret>");
 apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
-TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
+TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest |
 try {
     TransactionResponse result = apiInstance.createAndFundTransaction(transactionRequest);
     System.out.println(result);
@@ -477,8 +477,8 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createAndFundTransactions"></a>
-# **createAndFundTransactions**
+<a name="createAndFundTransaction"></a>
+# **createAndFundTransaction**
 > TransactionResponse createAndFundTransactions(transactionRequest)
 
 Creates and funds a new transaction
@@ -502,7 +502,7 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
 TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest |
 try {
-    TransactionResponse result = apiInstance.createAndFundTransactions(transactionRequest);
+    TransactionResponse result = apiInstance.createAndFundTransaction(transactionRequest);
     System.out.println(result);
 } catch (ApiException e) {
     if (e.isValidationError()) {
@@ -510,7 +510,7 @@ try {
         System.out.println(result);
         System.err.println("WARN: Validation error occurred when calling the endpoint");
     } else {
-        System.err.println("Exception when calling TransactionsApi#createAndFundTransactions");
+        System.err.println("Exception when calling TransactionsApi#createAndFundTransaction");
         e.printStackTrace();
     }
 }
