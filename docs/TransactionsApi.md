@@ -37,7 +37,7 @@ apiClient.setApiSecret("<secret>");
 apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
-TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest |
+TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.calculateTransactions(transactionRequest);
     System.out.println(result);
@@ -101,7 +101,7 @@ apiClient.setApiSecret("<secret>");
 apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
-TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest |
+TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.createAndFundTransaction(transactionRequest);
     System.out.println(result);
@@ -288,7 +288,7 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 Creates a fake payin for transaction
 
-This method is available only in sandbox environment and is supposed to be used only for testing integration. It allows you to emulate a payin without paying actual money.
+This method is available only in sandbox environment and is supposed to be used only for testing integration. It allows you to emulate a payin without paying actual money. 
 
 ### Example
 ```java
@@ -306,7 +306,7 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
 UUID transactionID = new UUID(); // UUID | ID of the transaction to payin.  Example: `/v1/transactions/bf9ff782-e182-45ac-abea-5bce83ad6670/payin`
-PayinMethodRequest payinMethodRequest = new PayinMethodRequest(); // PayinMethodRequest |
+PayinMethodRequest payinMethodRequest = new PayinMethodRequest(); // PayinMethodRequest | 
 try {
     TransactionResponse result = apiInstance.payinTransaction(transactionID, payinMethodRequest);
     System.out.println(result);
@@ -354,7 +354,7 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 Creates a fake payout for transaction
 
-This method is available only in sandbox environment and is supposed to be used only for testing. It allows you to emulate the payout of a transaction after payin.
+This method is available only in sandbox environment and is supposed to be used only for testing. It allows you to emulate the payout of a transaction after payin. 
 
 ### Example
 ```java
@@ -435,7 +435,7 @@ apiClient.setApiSecret("<secret>");
 apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
-TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest |
+TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.postTransactions(transactionRequest);
     System.out.println(result);
@@ -499,7 +499,7 @@ apiClient.setApiSecret("<secret>");
 apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 TransactionsApi apiInstance = new TransactionsApi(apiClient);
-TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest |
+TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.validateTransactions(transactionRequest);
     System.out.println(result);
@@ -539,3 +539,4 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
