@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.transferzero.sdk</groupId>
     <artifactId>transferzero-sdk-java7</artifactId>
@@ -12,7 +11,7 @@
         <connection>scm:git:https://github.com/transferzero/transferzero-sdk-java7.git</connection>
         <developerConnection>scm:git:git@github.com:transferzero/transferzero-sdk-java7.git</developerConnection>
         <url>https://github.com/transferzero/transferzero-sdk-java7</url>
-        <tag>HEAD</tag>
+        <tag>transferzero-sdk-java7-1.8.0</tag>
     </scm>
 
     <licenses>
@@ -140,18 +139,21 @@
                 </execution>
               </executions>
             </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <version>2.10.4</version>
-              <executions>
-                <execution>
-                  <id>attach-javadocs</id>
-                  <goals>
-                    <goal>jar</goal>
-                  </goals>
-                </execution>
-              </executions>
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <source>8</source>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
