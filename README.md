@@ -45,7 +45,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.transferzero.sdk</groupId>
   <artifactId>transferzero-sdk-java7</artifactId>
-  <version>1.12.0-SNAPSHOT</version>
+  <version>1.12.2-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.transferzero.sdk:transferzero-sdk-java7:1.12.0-SNAPSHOT"
+compile "com.transferzero.sdk:transferzero-sdk-java7:1.12.2-SNAPSHOT"
 ```
 
 ### Others
@@ -68,7 +68,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/transferzero-sdk-java7-1.12.0-SNAPSHOT.jar`
+* `target/transferzero-sdk-java7-1.12.2-SNAPSHOT.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -162,7 +162,6 @@ Class | Method | HTTP request | Description
 *WebhooksApi* | [**getWebhookEvents**](docs/WebhooksApi.md#getWebhookEvents) | **GET** /webhooks/events | Find possible webhook events
 *WebhooksApi* | [**getWebhooks**](docs/WebhooksApi.md#getWebhooks) | **GET** /webhooks | Listing webhooks
 *WebhooksApi* | [**postWebhooks**](docs/WebhooksApi.md#postWebhooks) | **POST** /webhooks | Creating a webhook
-
 
 ## Documentation for Models
 
