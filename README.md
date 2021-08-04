@@ -45,7 +45,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.transferzero.sdk</groupId>
   <artifactId>transferzero-sdk-java7</artifactId>
-  <version>1.15.0-SNAPSHOT</version>
+  <version>1.15.1-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.transferzero.sdk:transferzero-sdk-java7:1.15.0-SNAPSHOT"
+compile "com.transferzero.sdk:transferzero-sdk-java7:1.15.1-SNAPSHOT"
 ```
 
 ### Others
@@ -68,7 +68,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/transferzero-sdk-java7-1.15.0-SNAPSHOT.jar`
+* `target/transferzero-sdk-java7-1.15.1-SNAPSHOT.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -212,6 +212,7 @@ Class | Method | HTTP request | Description
  - [PayoutMethodBankAccountTypeEnum](docs/PayoutMethodBankAccountTypeEnum.md)
  - [PayoutMethodCashProviderEnum](docs/PayoutMethodCashProviderEnum.md)
  - [PayoutMethodCountryEnum](docs/PayoutMethodCountryEnum.md)
+ - [PayoutMethodCountryEnumUSDBank](docs/PayoutMethodCountryEnumUSDBank.md)
  - [PayoutMethodDetails](docs/PayoutMethodDetails.md)
  - [PayoutMethodDetailsBTC](docs/PayoutMethodDetailsBTC.md)
  - [PayoutMethodDetailsBalance](docs/PayoutMethodDetailsBalance.md)
@@ -219,17 +220,22 @@ Class | Method | HTTP request | Description
  - [PayoutMethodDetailsGHSBank](docs/PayoutMethodDetailsGHSBank.md)
  - [PayoutMethodDetailsGHSCash](docs/PayoutMethodDetailsGHSCash.md)
  - [PayoutMethodDetailsIBAN](docs/PayoutMethodDetailsIBAN.md)
+ - [PayoutMethodDetailsKESBank](docs/PayoutMethodDetailsKESBank.md)
+ - [PayoutMethodDetailsKESMobile](docs/PayoutMethodDetailsKESMobile.md)
  - [PayoutMethodDetailsMADCash](docs/PayoutMethodDetailsMADCash.md)
  - [PayoutMethodDetailsMobile](docs/PayoutMethodDetailsMobile.md)
  - [PayoutMethodDetailsNGNBank](docs/PayoutMethodDetailsNGNBank.md)
+ - [PayoutMethodDetailsUSDBank](docs/PayoutMethodDetailsUSDBank.md)
  - [PayoutMethodDetailsXOFBank](docs/PayoutMethodDetailsXOFBank.md)
  - [PayoutMethodDetailsXOFCash](docs/PayoutMethodDetailsXOFCash.md)
  - [PayoutMethodDetailsXOFMobile](docs/PayoutMethodDetailsXOFMobile.md)
  - [PayoutMethodDetailsZARBank](docs/PayoutMethodDetailsZARBank.md)
  - [PayoutMethodGenderEnum](docs/PayoutMethodGenderEnum.md)
  - [PayoutMethodIdentityCardTypeEnum](docs/PayoutMethodIdentityCardTypeEnum.md)
+ - [PayoutMethodLegalEntityTypeEnum](docs/PayoutMethodLegalEntityTypeEnum.md)
  - [PayoutMethodListResponse](docs/PayoutMethodListResponse.md)
  - [PayoutMethodMobileProviderEnum](docs/PayoutMethodMobileProviderEnum.md)
+ - [PayoutMethodNatureOfBusinessEnum](docs/PayoutMethodNatureOfBusinessEnum.md)
  - [PayoutMethodRequest](docs/PayoutMethodRequest.md)
  - [PayoutMethodResponse](docs/PayoutMethodResponse.md)
  - [PayoutMethodWebhook](docs/PayoutMethodWebhook.md)
@@ -291,3 +297,6 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
 ## Author
+
+
+
