@@ -31,25 +31,40 @@ Calculates the input, output and fee amounts for the recipients in a transaction
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.calculateTransactions(transactionRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#calculateTransactions");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#calculateTransactions");
+    e.printStackTrace();
 }
 ```
 
@@ -63,16 +78,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -95,25 +104,40 @@ This endpoint creates a transaction and funds it from an account balance. You mu
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.createAndFundTransaction(transactionRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#createAndFundTransaction");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#createAndFundTransaction");
+    e.printStackTrace();
 }
 ```
 
@@ -127,16 +151,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -159,26 +177,41 @@ Finds and returns a Transaction created by the requesting API key, using the pro
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 UUID transactionID = new UUID(); // UUID | ID of the transaction.  Example: `/v1/transactions/bf9ff782-e182-45ac-abea-5bce83ad6670`
 try {
     TransactionResponse result = apiInstance.getTransaction(transactionID)
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#getTransaction");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#getTransaction");
+    e.printStackTrace();
 }
 ```
 
@@ -192,16 +225,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -224,12 +251,33 @@ Retrieves a paginated list of the Transactions created by your API key.
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 Integer page = 1; // Integer | The page number to request (defaults to 1)
 Integer per = 10; // Integer | The number of results to load per page (defaults to 10)
 String externalId = "externalId_example"; // String | Allows filtering results by `external_id`.  Example: `/v1/senders?external_id=26ec8517-2f0d-48c0-b74f-0bccb9ab3a87`
@@ -245,14 +293,8 @@ try {
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionListResponse result = e.getResponseObject(TransactionListResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#getTransactions");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#getTransactions");
+    e.printStackTrace();
 }
 ```
 
@@ -270,16 +312,10 @@ Name | Type | Description  | Notes
 
 [**TransactionListResponse**](TransactionListResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -302,26 +338,41 @@ This method is available only in sandbox environment and is supposed to be used 
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 UUID transactionID = new UUID(); // UUID | ID of the transaction to payin.  Example: `/v1/transactions/bf9ff782-e182-45ac-abea-5bce83ad6670/payin`
 PayinMethodRequest payinMethodRequest = new PayinMethodRequest(); // PayinMethodRequest | 
 try {
     TransactionResponse result = apiInstance.payinTransaction(transactionID, payinMethodRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#payinTransaction");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#payinTransaction");
+    e.printStackTrace();
 }
 ```
 
@@ -336,16 +387,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -368,25 +413,40 @@ This method is available only in sandbox environment and is supposed to be used 
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 UUID transactionID = new UUID(); // UUID | ID of the transaction to payout.  Example: `/v1/transactions/bf9ff782-e182-45ac-abea-5bce83ad6670/payout`
 try {
     TransactionResponse result = apiInstance.payoutTransaction(transactionID);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#payoutTransaction");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#payoutTransaction");
+    e.printStackTrace();
 }
 ```
 
@@ -400,16 +460,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -432,25 +486,40 @@ Transactions are the main objects in the TransferZero API, so it&#39;s important
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.postTransactions(transactionRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#postTransactions");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#postTransactions");
+    e.printStackTrace();
 }
 ```
 
@@ -464,16 +533,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -496,25 +559,40 @@ Validates fields in a transaction payload and displays invalid or missing fields
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.TransactionsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-TransactionsApi apiInstance = new TransactionsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+TransactionsApi apiInstance = new TransactionsApi();
 TransactionRequest transactionRequest = new TransactionRequest(); // TransactionRequest | 
 try {
     TransactionResponse result = apiInstance.validateTransactions(transactionRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        TransactionResponse result = e.getResponseObject(TransactionResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling TransactionsApi#validateTransactions");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling TransactionsApi#validateTransactions");
+    e.printStackTrace();
 }
 ```
 
@@ -528,16 +606,10 @@ Name | Type | Description  | Notes
 
 [**TransactionResponse**](TransactionResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json

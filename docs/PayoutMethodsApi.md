@@ -28,25 +28,40 @@ Deletes a single payout method by the Payout Method ID
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.PayoutMethodsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-PayoutMethodsApi apiInstance = new PayoutMethodsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+PayoutMethodsApi apiInstance = new PayoutMethodsApi();
 UUID payoutMethodID = new UUID(); // UUID | ID of the payout method to delete.  Example: `/v1/payout_methods/bf9ff782-e182-45ac-abea-5bce83ad6670`
 try {
     PayoutMethodResponse result = apiInstance.deletePayoutMethod(payoutMethodID);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        PayoutMethodResponse result = e.getResponseObject(PayoutMethodResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling PayoutMethodsApi#deletePayoutMethod");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling PayoutMethodsApi#deletePayoutMethod");
+    e.printStackTrace();
 }
 ```
 
@@ -60,16 +75,10 @@ Name | Type | Description  | Notes
 
 [**PayoutMethodResponse**](PayoutMethodResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -92,26 +101,41 @@ Show a payout method by id
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.PayoutMethodsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-PayoutMethodsApi apiInstance = new PayoutMethodsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+PayoutMethodsApi apiInstance = new PayoutMethodsApi();
 UUID payoutMethodID = new UUID(); // UUID | ID of the payout method to get.  Example: `/v1/payout_methods/bf9ff782-e182-45ac-abea-5bce83ad6670`
 try {
     PayoutMethodResponse result = apiInstance.getPayoutMethod(payoutMethodID)
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        PayoutMethodResponse result = e.getResponseObject(PayoutMethodResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling PayoutMethodsApi#getPayoutMethod");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling PayoutMethodsApi#getPayoutMethod");
+    e.printStackTrace();
 }
 ```
 
@@ -125,16 +149,10 @@ Name | Type | Description  | Notes
 
 [**PayoutMethodResponse**](PayoutMethodResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -157,12 +175,33 @@ List available payout methods
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.PayoutMethodsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-PayoutMethodsApi apiInstance = new PayoutMethodsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+PayoutMethodsApi apiInstance = new PayoutMethodsApi();
 List<String> state = Arrays.asList(); // List<String> | Allows filtering results by `state` of the payout method.  Example: `/v1/payout_methods?state[]=enabled`
 List<String> type = Arrays.asList(); // List<String> | Allows filtering results by the specified type.  Example: `/v1/payout_methods?type[]=NGN::Bank`
 String senderId = "senderId_example"; // String | Allows filtering results by the specified sender id.  Example: `/v1/payout_methods?sender_id=bf9ff782-e182-45ac-abea-5bce83ad6670`
@@ -182,14 +221,8 @@ try {
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        PayoutMethodListResponse result = e.getResponseObject(PayoutMethodListResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling PayoutMethodsApi#getPayoutMethods");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling PayoutMethodsApi#getPayoutMethods");
+    e.printStackTrace();
 }
 ```
 
@@ -209,16 +242,10 @@ Name | Type | Description  | Notes
 
 [**PayoutMethodListResponse**](PayoutMethodListResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -241,26 +268,41 @@ Updates the payout method specified in the URL path.
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.PayoutMethodsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-PayoutMethodsApi apiInstance = new PayoutMethodsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+PayoutMethodsApi apiInstance = new PayoutMethodsApi();
 UUID payoutMethodID = new UUID(); // UUID | ID of the payout method to get.  Example: `/v1/payout_methods/bf9ff782-e182-45ac-abea-5bce83ad6670`
 PayoutMethod payoutMethod = new PayoutMethod(); // PayoutMethod | 
 try {
     PayoutMethodResponse result = apiInstance.patchPayoutMethod(payoutMethodID, payoutMethod);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        PayoutMethodResponse result = e.getResponseObject(PayoutMethodResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling PayoutMethodsApi#patchPayoutMethod");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling PayoutMethodsApi#patchPayoutMethod");
+    e.printStackTrace();
 }
 ```
 
@@ -275,16 +317,10 @@ Name | Type | Description  | Notes
 
 [**PayoutMethodResponse**](PayoutMethodResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -307,25 +343,40 @@ Creates a new payout method in our system.
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.PayoutMethodsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-PayoutMethodsApi apiInstance = new PayoutMethodsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+PayoutMethodsApi apiInstance = new PayoutMethodsApi();
 PayoutMethodRequest payoutMethodRequest = new PayoutMethodRequest(); // PayoutMethodRequest | 
 try {
     PayoutMethodResponse result = apiInstance.postPayoutMethods(payoutMethodRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        PayoutMethodResponse result = e.getResponseObject(PayoutMethodResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling PayoutMethodsApi#postPayoutMethods");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling PayoutMethodsApi#postPayoutMethods");
+    e.printStackTrace();
 }
 ```
 
@@ -339,16 +390,10 @@ Name | Type | Description  | Notes
 
 [**PayoutMethodResponse**](PayoutMethodResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json

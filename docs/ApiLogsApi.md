@@ -25,26 +25,41 @@ Returns a single API log based on the API log ID.
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.ApiLogsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-ApiLogsApi apiInstance = new ApiLogsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+ApiLogsApi apiInstance = new ApiLogsApi();
 UUID apILogID = new UUID(); // UUID | ID of the API log to retrieve  Example: `/v1/api_logs/00485ce9-532b-45e7-8518-7e5582242407`
 try {
     ApiLogResponse result = apiInstance.getApiLog(apILogID)
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        ApiLogResponse result = e.getResponseObject(ApiLogResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling ApiLogsApi#getApiLog");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling ApiLogsApi#getApiLog");
+    e.printStackTrace();
 }
 ```
 
@@ -58,16 +73,10 @@ Name | Type | Description  | Notes
 
 [**ApiLogResponse**](ApiLogResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -90,12 +99,33 @@ Returns a list of API logs. Also includes information relating to the original r
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.ApiLogsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-ApiLogsApi apiInstance = new ApiLogsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+ApiLogsApi apiInstance = new ApiLogsApi();
 Integer page = 1; // Integer | The page number to request (defaults to 1)
 Integer per = 10; // Integer | The number of results to load per page (defaults to 10)
 String createdAtFrom = "createdAtFrom_example"; // String | Start date to filter recipients by created_at range Allows filtering results by the specified `created_at` timeframe.  Example: `/v1/recipients?created_at_from=2018-06-06&created_at_to=2018-06-08`
@@ -109,14 +139,8 @@ try {
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        ApiLogListResponse result = e.getResponseObject(ApiLogListResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling ApiLogsApi#getApiLogs");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling ApiLogsApi#getApiLogs");
+    e.printStackTrace();
 }
 ```
 
@@ -133,16 +157,10 @@ Name | Type | Description  | Notes
 
 [**ApiLogListResponse**](ApiLogListResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined

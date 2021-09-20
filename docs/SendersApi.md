@@ -28,25 +28,40 @@ Deletes a single sender by the Sender ID
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.SendersApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-SendersApi apiInstance = new SendersApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+SendersApi apiInstance = new SendersApi();
 UUID senderID = new UUID(); // UUID | ID of the sender to delete.  Example: `/v1/senders/bf9ff782-e182-45ac-abea-5bce83ad6670`
 try {
     SenderResponse result = apiInstance.deleteSender(senderID);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        SenderResponse result = e.getResponseObject(SenderResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling SendersApi#deleteSender");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling SendersApi#deleteSender");
+    e.printStackTrace();
 }
 ```
 
@@ -60,16 +75,10 @@ Name | Type | Description  | Notes
 
 [**SenderResponse**](SenderResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -92,26 +101,41 @@ Returns a single sender by the Sender ID
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.SendersApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-SendersApi apiInstance = new SendersApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+SendersApi apiInstance = new SendersApi();
 UUID senderID = new UUID(); // UUID | ID of the sender to get.  Example: `/v1/senders/bf9ff782-e182-45ac-abea-5bce83ad6670`
 try {
     SenderResponse result = apiInstance.getSender(senderID)
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        SenderResponse result = e.getResponseObject(SenderResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling SendersApi#getSender");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling SendersApi#getSender");
+    e.printStackTrace();
 }
 ```
 
@@ -125,16 +149,10 @@ Name | Type | Description  | Notes
 
 [**SenderResponse**](SenderResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -157,12 +175,33 @@ Get a list of available senders
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.SendersApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-SendersApi apiInstance = new SendersApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+SendersApi apiInstance = new SendersApi();
 Integer page = 1; // Integer | The page number to request (defaults to 1)
 Integer per = 10; // Integer | The number of results to load per page (defaults to 10)
 String createdAtFrom = "createdAtFrom_example"; // String | Start date to filter recipients by created_at range Allows filtering results by the specified `created_at` timeframe.  Example: `/v1/recipients?created_at_from=2018-06-06&created_at_to=2018-06-08`
@@ -178,14 +217,8 @@ try {
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        SenderListResponse result = e.getResponseObject(SenderListResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling SendersApi#getSenders");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling SendersApi#getSenders");
+    e.printStackTrace();
 }
 ```
 
@@ -203,16 +236,10 @@ Name | Type | Description  | Notes
 
 [**SenderListResponse**](SenderListResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -235,26 +262,41 @@ Updates the sender specified in the URL path.
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.SendersApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-SendersApi apiInstance = new SendersApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+SendersApi apiInstance = new SendersApi();
 UUID senderID = new UUID(); // UUID | ID of the sender to get.  Example: `/v1/senders/bf9ff782-e182-45ac-abea-5bce83ad6670`
 SenderRequest senderRequest = new SenderRequest(); // SenderRequest | 
 try {
     SenderResponse result = apiInstance.patchSender(senderID, senderRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        SenderResponse result = e.getResponseObject(SenderResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling SendersApi#patchSender");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling SendersApi#patchSender");
+    e.printStackTrace();
 }
 ```
 
@@ -269,16 +311,10 @@ Name | Type | Description  | Notes
 
 [**SenderResponse**](SenderResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -301,12 +337,33 @@ Creates a new sender in our system.
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.SendersApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-SendersApi apiInstance = new SendersApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+SendersApi apiInstance = new SendersApi();
 SenderRequest senderRequest = {
   "sender": {
     "country": "UG",
@@ -349,14 +406,8 @@ try {
     SenderResponse result = apiInstance.postSenders(senderRequest);
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        SenderResponse result = e.getResponseObject(SenderResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling SendersApi#postSenders");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling SendersApi#postSenders");
+    e.printStackTrace();
 }
 ```
 
@@ -370,16 +421,10 @@ Name | Type | Description  | Notes
 
 [**SenderResponse**](SenderResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: application/json

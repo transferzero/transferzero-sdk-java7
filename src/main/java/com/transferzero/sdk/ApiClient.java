@@ -17,15 +17,12 @@ import okhttp3.*;
 import okhttp3.internal.http.HttpMethod;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import okio.Buffer;
 import okio.BufferedSink;
 import okio.Okio;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormatter;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.*;
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +33,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
@@ -48,19 +44,19 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.google.gson.JsonParseException;
+
+import com.transferzero.sdk.auth.Authentication;
+import com.transferzero.sdk.auth.HttpBasicAuth;
+import com.transferzero.sdk.auth.ApiKeyAuth;
 
 public class ApiClient {
-    // Interface responsible for intercepting and handling Api requests and responses.
-    public interface ApiInterceptor {
-        Request handlePreRequest(Request request);
-        Response handlePostResponse(Response response);
-    }
 
     private String basePath = "https://api-sandbox.transferzero.com/v1";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
+
+    private Map<String, Authentication> authentications;
 
     private DateFormat dateFormat;
     private DateFormat datetimeFormat;
@@ -74,27 +70,26 @@ public class ApiClient {
     private OkHttpClient httpClient;
     private JSON json;
 
-    private String apiKey;
-    private String apiSecret;
-
     private HttpLoggingInterceptor loggingInterceptor;
 
-    public ApiInterceptor apiInterceptor;
-
+    /*
+     * Basic constructor for ApiClient
+     */
     public ApiClient() {
         init();
-    }
 
-    public ApiClient(String apiKey, String apiSecret) {
-        this.apiKey = apiKey;
-        this.apiSecret = apiSecret;
-
-        init();
+        // Setup authentications (key: authentication name, value: authentication).
+        authentications.put("AuthorizationKey", new ApiKeyAuth("header", "Authorization-Key"));
+        authentications.put("AuthorizationNonce", new ApiKeyAuth("header", "Authorization-Nonce"));
+        authentications.put("AuthorizationSecret", new ApiKeyAuth("header", "Authorization-Secret"));
+        authentications.put("AuthorizationSignature", new ApiKeyAuth("header", "Authorization-Signature"));
+        // Prevent the authentications from being modified.
+        authentications = Collections.unmodifiableMap(authentications);
     }
 
     private void init() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(getProgressInterceptor());
+        builder.addNetworkInterceptor(getProgressInterceptor());
         httpClient = builder.build();
 
 
@@ -103,18 +98,9 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("TransferZero-SDK/Java7/1.16.0-SNAPSHOT");
-    }
+        setUserAgent("TransferZero-SDK/Java7");
 
-    /**
-     * Set api interceptor
-     *
-     * @param apiInterceptor
-     * @return ApiClient
-     */
-    public ApiClient setApiInterceptor(ApiInterceptor apiInterceptor) {
-        this.apiInterceptor = apiInterceptor;
-        return this;
+        authentications = new HashMap<String, Authentication>();
     }
 
     /**
@@ -134,46 +120,6 @@ public class ApiClient {
      */
     public ApiClient setBasePath(String basePath) {
         this.basePath = basePath;
-        return this;
-    }
-
-    /**
-     * Get apiKey
-     *
-     * @return ApiKey
-     */
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    /**
-     * Set api key
-     *
-     * @param apiKey the api key to use
-     * @return Api Client
-     */
-    public ApiClient setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
-    }
-
-    /**
-     * Get apiSecret
-     *
-     * @return ApiSecret
-     */
-    public String getApiSecret() {
-        return apiSecret;
-    }
-
-    /**
-     * Set api secret
-     *
-     * @param apiSecret the api key to use
-     * @return Api Client
-     */
-    public ApiClient setApiSecret(String apiSecret) {
-        this.apiSecret = apiSecret;
         return this;
     }
 
@@ -320,6 +266,94 @@ public class ApiClient {
     }
 
     /**
+     * Get authentications (key: authentication name, value: authentication).
+     *
+     * @return Map of authentication objects
+     */
+    public Map<String, Authentication> getAuthentications() {
+        return authentications;
+    }
+
+    /**
+     * Get authentication for the given name.
+     *
+     * @param authName The authentication name
+     * @return The authentication, null if not found
+     */
+    public Authentication getAuthentication(String authName) {
+        return authentications.get(authName);
+    }
+
+    /**
+     * Helper method to set username for the first HTTP basic authentication.
+     *
+     * @param username Username
+     */
+    public void setUsername(String username) {
+        for (Authentication auth : authentications.values()) {
+            if (auth instanceof HttpBasicAuth) {
+                ((HttpBasicAuth) auth).setUsername(username);
+                return;
+            }
+        }
+        throw new RuntimeException("No HTTP basic authentication configured!");
+    }
+
+    /**
+     * Helper method to set password for the first HTTP basic authentication.
+     *
+     * @param password Password
+     */
+    public void setPassword(String password) {
+        for (Authentication auth : authentications.values()) {
+            if (auth instanceof HttpBasicAuth) {
+                ((HttpBasicAuth) auth).setPassword(password);
+                return;
+            }
+        }
+        throw new RuntimeException("No HTTP basic authentication configured!");
+    }
+
+    /**
+     * Helper method to set API key value for the first API key authentication.
+     *
+     * @param apiKey API key
+     */
+    public void setApiKey(String apiKey) {
+        for (Authentication auth : authentications.values()) {
+            if (auth instanceof ApiKeyAuth) {
+                ((ApiKeyAuth) auth).setApiKey(apiKey);
+                return;
+            }
+        }
+        throw new RuntimeException("No API key authentication configured!");
+    }
+
+    /**
+     * Helper method to set API key prefix for the first API key authentication.
+     *
+     * @param apiKeyPrefix API key prefix
+     */
+    public void setApiKeyPrefix(String apiKeyPrefix) {
+        for (Authentication auth : authentications.values()) {
+            if (auth instanceof ApiKeyAuth) {
+                ((ApiKeyAuth) auth).setApiKeyPrefix(apiKeyPrefix);
+                return;
+            }
+        }
+        throw new RuntimeException("No API key authentication configured!");
+    }
+
+    /**
+     * Helper method to set access token for the first OAuth2 authentication.
+     *
+     * @param accessToken Access token
+     */
+    public void setAccessToken(String accessToken) {
+        throw new RuntimeException("No OAuth2 authentication configured!");
+    }
+
+    /**
      * Set the User-Agent header's value (by adding to the default header map).
      *
      * @param userAgent HTTP request's user agent
@@ -460,6 +494,7 @@ public class ApiClient {
         httpClient = httpClient.newBuilder().writeTimeout(writeTimeout, TimeUnit.MILLISECONDS).build();
         return this;
     }
+
 
     /**
      * Format the given parameter object into string.
@@ -734,62 +769,7 @@ public class ApiClient {
                     "Content type \"" + contentType + "\" is not supported for type: " + returnType,
                     response.code(),
                     response.headers().toMultimap(),
-                    response);
-        }
-    }
-
-    /**
-     * Uses the Authorization Signature in the request headers to validate the payload.
-     *
-     * @param url The full url including any query strings
-     * @param body The body from the request
-     * @param headers The request headers
-     * @return boolean
-     * @throws ApiException If fail to deserialize response body
-     */
-    public boolean validateWebhookRequest(String url, String body, Map<String, String> headers) throws ApiException {
-      String nonce = headers.get("Authorization-Nonce");
-      String signature = headers.get("Authorization-Signature");
-      String key = headers.get("Authorization-Key");
-      String method = "POST";
-
-      if (nonce == null || signature == null || !key.equals(getApiKey())) {
-        return false;
-      }
-
-      String headerSignature = signRequest(url, nonce, method, body);
-
-      if (headerSignature.equals(signature)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    /**
-     * Parses and deserializes a response in string format.
-     * Can be used to parse webhook responses that were already converted to strings
-     *
-     * @param <T> Type
-     * @param response the object we wish to parse
-     * @param returnType The type of the Java object
-     * @return The deserialized Java object
-     * @throws ApiException If fail to deserialize response body
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T parseResponseString(String response, Type returnType) throws ApiException {
-        if (response == null || returnType == null) {
-            return null;
-        }
-
-        if (response == null || "".equals(response)) {
-            return null;
-        }
-
-        try {
-            return json.deserialize(response, returnType);
-        } catch (JsonParseException e) {
-            throw new ApiException(e);
+                    respBody);
         }
     }
 
@@ -970,13 +950,6 @@ public class ApiClient {
      *                      fail to deserialize the response body
      */
     public <T> T handleResponse(Response response, Type returnType) throws ApiException {
-        if (apiInterceptor != null) {
-            response = apiInterceptor.handlePostResponse(response);
-            if (response == null) {
-               throw new ApiException();
-            }
-        }
-
         if (response.isSuccessful()) {
             if (returnType == null || response.code() == 204) {
                 // returning null if the returnType is not defined,
@@ -993,11 +966,15 @@ public class ApiClient {
                 return deserialize(response, returnType);
             }
         } else {
-            if (response.code() == 422) {
-                throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), response, true, this);
-            } else {
-                throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), response);
+            String respBody = null;
+            if (response.body() != null) {
+                try {
+                    respBody = response.body().string();
+                } catch (IOException e) {
+                    throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
+                }
             }
+            throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody);
         }
     }
 
@@ -1019,13 +996,6 @@ public class ApiClient {
     public Call buildCall(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, Object> formParams, String[] authNames, ApiCallback callback) throws ApiException {
         Request request = buildRequest(path, method, queryParams, collectionQueryParams, body, headerParams, formParams, authNames, callback);
 
-        if (apiInterceptor != null) {
-             request = apiInterceptor.handlePreRequest(request);
-             if (request == null) {
-                 throw new ApiException();
-             }
-        }
-
         return httpClient.newCall(request);
     }
 
@@ -1045,6 +1015,8 @@ public class ApiClient {
      * @throws ApiException If fail to serialize the request body object
      */
     public Request buildRequest(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, Object> formParams, String[] authNames, ApiCallback callback) throws ApiException {
+        updateParamsForAuth(authNames, queryParams, headerParams);
+
         final String url = buildUrl(path, queryParams, collectionQueryParams);
         final Request.Builder reqBuilder = new Request.Builder().url(url);
         processHeaderParams(headerParams, reqBuilder);
@@ -1074,30 +1046,6 @@ public class ApiClient {
             reqBody = serialize(body, contentType);
         }
 
-        final String hmacSha512 = "HmacSHA512";
-        final String nonce = java.util.UUID.randomUUID().toString();
-
-        if (getApiKey() == null || getApiSecret() == null) {
-            throw new ApiException("Please set the API key and secret on the ApiClient");
-        }
-
-        try {
-            String bodyStr = "";
-            if (reqBody != null) {
-                Buffer buf = new Buffer();
-                reqBody.writeTo(buf);
-                bodyStr = buf.readUtf8();
-            }
-
-            String hmacResult = signRequest(url, nonce, method, bodyStr);
-
-            reqBuilder.header("Authorization-Signature", hmacResult.toString());
-            reqBuilder.header("Authorization-Key", getApiKey());
-            reqBuilder.header("Authorization-Nonce", nonce);
-        } catch (Exception e) {
-            throw new ApiException(e);
-        }
-
         // Associate callback with request (if not null) so interceptor can
         // access it when creating ProgressResponseBody
         reqBuilder.tag(callback);
@@ -1112,56 +1060,6 @@ public class ApiClient {
         }
 
         return request;
-    }
-
-    /**
-     * Builds the authorization signature with the given options.
-     *
-     * @param url The full url including any query strings
-     * @param nonce The nonce from the request header
-     * @param method The request method, one of "GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH" and "DELETE"
-     * @param bodyStr The body from the request
-     * @return The hmacResult
-     * @throws ApiException If fail to serialize the request body object
-     */
-    public String signRequest(String url, String nonce, String method, String bodyStr) throws ApiException {
-        final String hmacSha512 = "HmacSHA512";
-
-        StringBuilder hmacResult;
-
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            byte[] sha512 = md.digest(bodyStr.getBytes("UTF-8"));
-            StringBuilder md5HashOfBody = new StringBuilder(sha512.length * 2);
-            for (int i = 0; i < sha512.length; i++) {
-                int intVal = sha512[i] & 0xff;
-                if (intVal < 0x10) {
-                    md5HashOfBody.append("0");
-                }
-                md5HashOfBody.append(Integer.toHexString(intVal));
-            }
-
-            String signature = String.format("%s&%s&%s&%s", nonce, method, url, md5HashOfBody.toString());
-
-            byte[] byteKey = getApiSecret().getBytes("UTF-8");
-            Mac sha512_HMAC = Mac.getInstance(hmacSha512);
-            SecretKeySpec keySpec = new SecretKeySpec(byteKey, hmacSha512);
-            sha512_HMAC.init(keySpec);
-            byte[] mac_data = sha512_HMAC.doFinal(signature.getBytes("UTF-8"));
-
-            hmacResult = new StringBuilder(mac_data.length * 2);
-            for (int i = 0; i < mac_data.length; i++) {
-                int intVal = mac_data[i] & 0xff;
-                if (intVal < 0x10) {
-                    hmacResult.append("0");
-                }
-                hmacResult.append(Integer.toHexString(intVal));
-            }
-        } catch (Exception e) {
-            throw new ApiException(e);
-        }
-
-        return hmacResult.toString();
     }
 
     /**
@@ -1227,6 +1125,23 @@ public class ApiClient {
             if (!headerParams.containsKey(header.getKey())) {
                 reqBuilder.header(header.getKey(), parameterToString(header.getValue()));
             }
+        }
+    }
+
+    /**
+     * Update query and header parameters based on authentication settings.
+     *
+     * @param authNames The authentications to apply
+     * @param queryParams List of query parameters
+     * @param headerParams Map of header parameters
+     */
+    public void updateParamsForAuth(String[] authNames, List<Pair> queryParams, Map<String, String> headerParams) {
+        for (String authName : authNames) {
+            Authentication auth = authentications.get(authName);
+            if (auth == null) {
+                throw new RuntimeException("Authentication undefined: " + authName);
+            }
+            auth.applyToParams(queryParams, headerParams);
         }
     }
 

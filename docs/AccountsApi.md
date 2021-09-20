@@ -25,26 +25,41 @@ Fetches account balance for specified currrency, and returns current balance and
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.AccountsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-AccountsApi apiInstance = new AccountsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+AccountsApi apiInstance = new AccountsApi();
 String currency = "currency_example"; // String | Currency code of account balance to fetch  Example: `/v1/accounts/USD`
 try {
     AccountResponse result = apiInstance.getAccount(currency)
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        AccountResponse result = e.getResponseObject(AccountResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling AccountsApi#getAccount");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling AccountsApi#getAccount");
+    e.printStackTrace();
 }
 ```
 
@@ -58,16 +73,10 @@ Name | Type | Description  | Notes
 
 [**AccountResponse**](AccountResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -90,25 +99,40 @@ Fetches account balances for all currencies, and returns an array of the current
 //import com.transferzero.sdk.auth.*;
 //import com.transferzero.sdk.api.AccountsApi;
 
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
+ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-AccountsApi apiInstance = new AccountsApi(apiClient);
+// Configure API key authorization: AuthorizationKey
+ApiKeyAuth AuthorizationKey = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationKey");
+AuthorizationKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationNonce
+ApiKeyAuth AuthorizationNonce = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationNonce");
+AuthorizationNonce.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationNonce.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSecret
+ApiKeyAuth AuthorizationSecret = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSecret");
+AuthorizationSecret.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSecret.setApiKeyPrefix("Token");
+
+// Configure API key authorization: AuthorizationSignature
+ApiKeyAuth AuthorizationSignature = (ApiKeyAuth) defaultClient.getAuthentication("AuthorizationSignature");
+AuthorizationSignature.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//AuthorizationSignature.setApiKeyPrefix("Token");
+
+AccountsApi apiInstance = new AccountsApi();
 try {
     AccountListResponse result = apiInstance.getAccounts()
             .execute();
     System.out.println(result);
 } catch (ApiException e) {
-    if (e.isValidationError()) {
-        AccountListResponse result = e.getResponseObject(AccountListResponse.class);
-        System.out.println(result);
-        System.err.println("WARN: Validation error occurred when calling the endpoint");
-    } else {
-        System.err.println("Exception when calling AccountsApi#getAccounts");
-        e.printStackTrace();
-    }
+    System.err.println("Exception when calling AccountsApi#getAccounts");
+    e.printStackTrace();
 }
 ```
 
@@ -119,16 +143,10 @@ This endpoint does not need any parameter.
 
 [**AccountListResponse**](AccountListResponse.md)
 
-## Authorization
+### Authorization
 
-You can set the API Key and Secret on the ApiClient object for authentication:
+[AuthorizationKey](../README.md#AuthorizationKey), [AuthorizationNonce](../README.md#AuthorizationNonce), [AuthorizationSecret](../README.md#AuthorizationSecret), [AuthorizationSignature](../README.md#AuthorizationSignature)
 
-```java
-ApiClient apiClient = new ApiClient();
-apiClient.setApiKey("<key>");
-apiClient.setApiSecret("<secret>");
-apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
-```
 ### HTTP request headers
 
  - **Content-Type**: Not defined

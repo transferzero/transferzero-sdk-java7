@@ -13,19 +13,14 @@
 
 package com.transferzero.sdk;
 
-import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.List;
-
-import okhttp3.Response;
 
 
 public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
-    private Response response = null;
-    private boolean validationError = false;
-    private ApiClient apiClient = null;
+    private String responseBody = null;
 
     public ApiException() {}
 
@@ -37,23 +32,23 @@ public class ApiException extends Exception {
         super(message);
     }
 
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, Response response) {
+    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, String responseBody) {
         super(message, throwable);
         this.code = code;
         this.responseHeaders = responseHeaders;
-        this.response = response;
+        this.responseBody = responseBody;
     }
 
-    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, Response response) {
-        this(message, (Throwable) null, code, responseHeaders, response);
+    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, String responseBody) {
+        this(message, (Throwable) null, code, responseHeaders, responseBody);
     }
 
     public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders) {
         this(message, throwable, code, responseHeaders, null);
     }
 
-    public ApiException(int code, Map<String, List<String>> responseHeaders, Response response) {
-        this((String) null, (Throwable) null, code, responseHeaders, response);
+    public ApiException(int code, Map<String, List<String>> responseHeaders, String responseBody) {
+        this((String) null, (Throwable) null, code, responseHeaders, responseBody);
     }
 
     public ApiException(int code, String message) {
@@ -61,16 +56,10 @@ public class ApiException extends Exception {
         this.code = code;
     }
 
-    public ApiException(int code, String message, Map<String, List<String>> responseHeaders, Response response) {
+    public ApiException(int code, String message, Map<String, List<String>> responseHeaders, String responseBody) {
         this(code, message);
         this.responseHeaders = responseHeaders;
-        this.response = response;
-    }
-
-    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, Response response, boolean isValidationError, ApiClient apiClient) {
-        this(message, code, responseHeaders, response);
-        this.validationError = isValidationError;
-        this.apiClient = apiClient;
+        this.responseBody = responseBody;
     }
 
     /**
@@ -96,18 +85,7 @@ public class ApiException extends Exception {
      *
      * @return Response body in the form of string
      */
-    public Response getResponse() {
-        return response;
-    }
-
-    public boolean isValidationError() {
-        return validationError;
-    }
-
-    public <T> T getResponseObject(Type returnType) throws ApiException {
-        if (apiClient != null && isValidationError()) {
-            return apiClient.deserialize(getResponse(), returnType);
-        }
-        return null;
+    public String getResponseBody() {
+        return responseBody;
     }
 }
