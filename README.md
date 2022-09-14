@@ -306,7 +306,7 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 
 ## Recommendation
 
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+It is recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
 ## Author
 
