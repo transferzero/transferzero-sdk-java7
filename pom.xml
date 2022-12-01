@@ -4,14 +4,14 @@
     <artifactId>transferzero-sdk-java7</artifactId>
     <packaging>jar</packaging>
     <name>transferzero-sdk-java7</name>
-    <version>1.23.4-SNAPSHOT</version>
+    <version>1.23.4</version>
     <url>https://github.com/transferzero/transferzero-sdk-java7</url>
     <description>Java 7 library for the TransferZero API</description>
     <scm>
         <connection>scm:git:https://github.com/transferzero/transferzero-sdk-java7.git</connection>
         <developerConnection>scm:git:git@github.com:transferzero/transferzero-sdk-java7.git</developerConnection>
         <url>https://github.com/transferzero/transferzero-sdk-java7</url>
-        <tag>HEAD</tag>
+        <tag>transferzero-sdk-java7-1.23.4</tag>
     </scm>
 
     <licenses>
