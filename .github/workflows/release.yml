@@ -4,6 +4,7 @@ on:
     branches:
       - BTA-11168-ci-cd-action
       - master
+      
   workflow_dispatch:
 
 jobs:
