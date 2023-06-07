@@ -44,8 +44,8 @@ jobs:
           echo "${{ secrets.GPG_PVT }}" > mvn_private_key.asc
           echo "${{ secrets.GPG_PUB }}" > mvn_public_key.asc
           ls
-          gpg --import mvn_private_key.asc
-          gpg --import mvn_public_key.asc
+          gpg --batch --import mvn_private_key.asc
+          gpg --batch --import mvn_public_key.asc
           mvn release:perform -Prelease
 
 # name: Publish Package to Maven
