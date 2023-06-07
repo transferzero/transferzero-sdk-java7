@@ -1,4 +1,4 @@
-name: Publish Package to Maven
+name: Publish Package to Mvn
 on:
   push:
     branches:
@@ -22,6 +22,7 @@ jobs:
         distribution: 'zulu'
         java-version: 8
         cache: 'maven'
+
     # - name: fetch gpg
     #   run: |
     #     echo "${{ secrets.GPG_PVT }}" > mvn_private_key.asc
