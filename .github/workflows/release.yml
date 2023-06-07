@@ -2,7 +2,7 @@ name: Publish Package to Mvn
 on:
   push:
     branches:
-      - BTA-11168-ci-cd-action
+      - BTA-11168-ci-cd
       - master
   workflow_dispatch:
 
