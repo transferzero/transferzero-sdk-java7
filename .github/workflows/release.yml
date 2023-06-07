@@ -27,8 +27,8 @@ jobs:
         cache: 'maven'
     - name: fetch gpg
       run: |
-        cat ${{ secrets.GPG_PVT }} > mvn_private_key.asc
-        cat ${{ secrets.GPG_PUB }} > mvn_public_key.asc
+        echo "${{ secrets.GPG_PVT }}" > mvn_private_key.asc
+        echo "${{ secrets.GPG_PUB }}" > mvn_public_key.asc
         ls
 
     - name: Build
