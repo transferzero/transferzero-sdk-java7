@@ -4,7 +4,6 @@ on:
     branches:
       - BTA-11168-ci-cd-action
       - master
-      
   workflow_dispatch:
 
 jobs:
@@ -12,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MAVEN_OPTS: "-Xms64M -Xmx1600M -Dhttp.keepAlive=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=15 -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.rto=15000"
-    # strategy:
-    #   matrix:
-    #     jdk: ['8', '9']
 
     steps:
 
