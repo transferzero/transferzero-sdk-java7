@@ -7,29 +7,70 @@ on:
   workflow_dispatch:
 
 jobs:
-  release-transferzero-javascript-sdk:
+  build:
     runs-on: ubuntu-latest
+    env:
+      MAVEN_OPTS: "-Xms64M -Xmx1600M -Dhttp.keepAlive=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=15 -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.rto=15000"
+    # strategy:
+    #   matrix:
+    #     jdk: ['8', '9']
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      - name: Set up Maven Central Repository
-        uses: actions/setup-java@v3
-        with:
-          java-version: '8'
-          distribution: 'adopt'
-          server-id: ossrh
-          server-username: ${{ secrets.MAVEN_USERNAME }}
-          server-password: ${{ secrets.MAVEN_PASSWORD }}
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK ${{ matrix.jdk }}
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: 8
+        cache: 'maven'
+
+    - name: Build
+      env:
+        GPG_PVT: ${{ secrets.GPG_PVT }}
+        GPG_PUB: ${{ secrets.GPG_PUB }}
+        REPO_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        SONATYPE_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+        SONATYPE_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+      run: |
+          echo $GPG_PVT | base64 -d | gpg --import --no-tty --batch --yes &> /dev/null &&
+          echo $GPG_PUB | base64 -d | gpg --import --no-tty --batch --yes &> /dev/null &&
+          mvn release:perform -Prelease
+
+# name: Publish Package to Maven
+# on:
+#   push:
+#     branches:
+#       - BTA-11168-ci-cd-action
+#       - master
+#   workflow_dispatch:
+
+# jobs:
+#   release-transferzero-javascript-sdk:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+
+#       - name: Set up Maven Central Repository
+#         uses: actions/setup-java@v3
+#         with:
+#           java-version: '8'
+#           distribution: 'adopt'
+#           server-id: ossrh
+#           server-username: ${{ secrets.MAVEN_USERNAME }}
+#           server-password: ${{ secrets.MAVEN_PASSWORD }}
   
-      - name: Publish Maven package
-        run: mvn --batch-mode deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+#       - name: Publish Maven package
+#         run: mvn --batch-mode deploy
+#         env:
+#           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+#           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
-      # - name: Tag the release
-      #   run: |
-      #     NEXT_TAG=$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json)
-      #     git tag $NEXT_TAG
-      #     git push --tags
+#       # - name: Tag the release
+#       #   run: |
+#       #     NEXT_TAG=$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json)
+#       #     git tag $NEXT_TAG
+#       #     git push --tags
