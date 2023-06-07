@@ -41,8 +41,8 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
       run: |
           export GPG_TTY=$(tty)
-          gpg --import mvn_private_key.asc
-          gpg --import mvn_public_key.asc
+          gpg --import "${{ secrets.GPG_PVT }}"
+          gpg --import "${{ secrets.GPG_PUB }}"
           mvn release:perform -Prelease
 
 # name: Publish Package to Maven
