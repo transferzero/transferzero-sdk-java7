@@ -32,7 +32,7 @@ jobs:
     - name: Build
       env:
         GPG_PVT: ${{ secrets.GPG_PVT }}
-        GPG_PUB: ${{ env.GPG_PUB }}
+        GPG_PUB: ${{ vars.GPG_PUB }}
         REPO_TOKEN: ${{ secrets.OSSRH_TOKEN }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         SONATYPE_USERNAME: ${{ secrets.MAVEN_USERNAME }}
