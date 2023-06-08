@@ -1,4 +1,4 @@
-name: Publish Package to Mvn
+name: Publish Package to Maven
 on:
   push:
     branches:
@@ -7,13 +7,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  transferzero-java-sdk:
     runs-on: ubuntu-latest
     env:
       MAVEN_OPTS: "-Xms64M -Xmx1600M -Dhttp.keepAlive=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=15 -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.rto=15000"
 
     steps:
-
     - uses: actions/checkout@v3
 
     - name: setup git config
@@ -28,13 +27,7 @@ jobs:
         java-version: 8
         cache: 'maven'
 
-    # - name: fetch gpg
-    #   run: |
-    #     echo "${{ secrets.GPG_PVT }}" > mvn_private_key.asc
-    #     echo "${{ secrets.GPG_PUB }}" > mvn_public_key.asc
-    #     ls
-
-    - name: Generate settings.xml
+    - name: Generate the settings.xml file
       env:
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         SONATYPE_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -61,57 +54,15 @@ jobs:
           echo "   </profiles>" >> ~/.m2/settings.xml
           echo " </settings>" >> ~/.m2/settings.xml
 
-    - name: Build
+    - name: SDK Release
       env:
         GPG_PVT: ${{ secrets.GPG_PVT }}
         GPG_PUB: ${{ secrets.GPG_PUB }}
-        REPO_TOKEN: ${{ secrets.OSSRH_TOKEN }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        SONATYPE_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-        SONATYPE_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-        GPG_PVT_KEYNAME: ${{ secrets.GPG_PVT_KEYNAME }}
       run: |
-          cat ~/.m2/settings.xml
           export GPG_TTY=$(tty)
           echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
           echo -n '${{ secrets.GPG_PUB }}' > mvn_public_key.asc
-          gpg2 --batch --import mvn_private_key.asc
+          gpg --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
           mvn release:prepare -Dresume=false -Prelease
           mvn release:perform -Prelease
-
-# name: Publish Package to Maven
-# on:
-#   push:
-#     branches:
-#       - BTA-11168-ci-cd-action
-#       - master
-#   workflow_dispatch:
-
-# jobs:
-#   release-transferzero-javascript-sdk:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-
-#       - name: Set up Maven Central Repository
-#         uses: actions/setup-java@v3
-#         with:
-#           java-version: '8'
-#           distribution: 'adopt'
-#           server-id: ossrh
-#           server-username: ${{ secrets.MAVEN_USERNAME }}
-#           server-password: ${{ secrets.MAVEN_PASSWORD }}
-  
-#       - name: Publish Maven package
-#         run: mvn --batch-mode deploy
-#         env:
-#           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-#           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-
-#       # - name: Tag the release
-#       #   run: |
-#       #     NEXT_TAG=$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json)
-#       #     git tag $NEXT_TAG
-#       #     git push --tags
