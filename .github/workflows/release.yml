@@ -41,8 +41,6 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
         GPG_PVT_KEYNAME: ${{ secrets.GPG_PVT_KEYNAME }}
       run: |
-          mkdir ~/.m2
-          cd .m2
           echo "<settings xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'>" >> ~/.m2/settings.xml
 
           echo " <settings>" >> ~/.m2/settings.xml
