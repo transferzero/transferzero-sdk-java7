@@ -41,8 +41,8 @@ jobs:
           export GPG_TTY=$(tty)
           echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
           echo -n '${{ vars.GPG_PUB }}' > mvn_public_key.asc
-          cat mvn_public_key.asc
-          gpg --batch --import mvn_private_key.asc
+          hexdump -C mvn_private_key.asc | head
+          gpg2 --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
           mvn release:prepare -Dresume=false -Prelease
           mvn release:perform -Prelease
