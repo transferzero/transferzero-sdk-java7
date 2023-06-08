@@ -65,8 +65,8 @@ jobs:
           gpg --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
           
-          # mvn release:prepare -Dresume=false -Prelease -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn release:prepare -Dresume=false -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} -Prelease
           # mvn release:perform -Prelease -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
 
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
+    # - name: Setup upterm session
+    #   uses: lhotari/action-upterm@v1
