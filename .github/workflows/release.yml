@@ -58,6 +58,7 @@ jobs:
       env:
         GPG_PVT: ${{ secrets.GPG_PVT }}
         GPG_PUB: ${{ secrets.GPG_PUB }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       run: |
           export GPG_TTY=$(tty)
           echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
@@ -66,7 +67,7 @@ jobs:
           gpg --batch --import mvn_public_key.asc
           
           mvn release:prepare -Dresume=false -Prelease
-          # mvn release:perform -Prelease -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn release:perform -Prelease
 
     # - name: Setup upterm session
     #   uses: lhotari/action-upterm@v1
