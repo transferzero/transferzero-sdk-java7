@@ -39,8 +39,8 @@ jobs:
         SONATYPE_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
       run: |
           export GPG_TTY=$(tty)
-          echo "${{ secrets.GPG_PVT }}" > mvn_private_key.asc
-          echo "${{ vars.GPG_PUB }}" > mvn_public_key.asc
+          echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
+          echo -n '${{ vars.GPG_PUB }}' > mvn_public_key.asc
           gpg2 --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
           mvn release:prepare -Dresume=false -Prelease
