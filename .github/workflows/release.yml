@@ -59,10 +59,9 @@ jobs:
         GPG_PVT: ${{ secrets.GPG_PVT }}
         GPG_PUB: ${{ secrets.GPG_PUB }}
       run: |
-          export GPG_TTY=$(tty)
           echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
           echo -n '${{ secrets.GPG_PUB }}' > mvn_public_key.asc
-          gpg --no-tty --batch --import mvn_private_key.asc
-          gpg --no-tty --batch --import mvn_public_key.asc
+          gpg  --import mvn_private_key.asc
+          gpg  --import mvn_public_key.asc
           mvn release:prepare -Dresume=false -Prelease
           mvn release:perform -Prelease
