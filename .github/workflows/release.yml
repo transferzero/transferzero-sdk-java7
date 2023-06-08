@@ -47,16 +47,16 @@ jobs:
           echo "   <servers>" >> settings.xml
           echo "    <server>" >> settings.xml
           echo "     <id>ossrh</id>" >> settings.xml
-          echo "     <username>${env.SONATYPE_USERNAME}</username>" >> settings.xml
-          echo "     <password>${env.SONATYPE_PASSWORD}</password>" >> settings.xml
+          echo "     <username>$SONATYPE_USERNAME</username>" >> settings.xml
+          echo "     <password>$SONATYPE_PASSWORD</password>" >> settings.xml
           echo "    </server>" >> settings.xml
           echo "   </servers>" >> settings.xml
           echo "   <profiles>" >> settings.xml
           echo "     <profile>" >> settings.xml
           echo "      <id>release</id>" >> settings.xml
           echo "      <properties>" >> settings.xml
-          echo "        <gpg.keyname>${env.GPG_PVT_KEYNAME}</gpg.keyname>" >> settings.xml
-          echo "        <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>" >> settings.xml
+          echo "        <gpg.keyname>$GPG_PVT_KEYNAME</gpg.keyname>" >> settings.xml
+          echo "        <gpg.passphrase>$GPG_PASSPHRASE</gpg.passphrase>" >> settings.xml
           echo "      </properties>" >> settings.xml
           echo "     </profile>" >> settings.xml
           echo "   </profiles>" >> settings.xml
