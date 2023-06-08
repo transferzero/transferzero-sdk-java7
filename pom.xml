@@ -208,10 +208,10 @@
                   <configuration>
                       <!-- Prevent `gpg` from using pinentry programs -->
                       <gpgArguments>
-                          <arg>--no-tty</arg>
                           <arg>--pinentry-mode</arg>
                           <arg>loopback</arg>
                       </gpgArguments>
+                      <useAgent>true</useAgent>
                   </configuration>
                 </execution>
               </executions>
