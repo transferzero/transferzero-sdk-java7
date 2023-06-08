@@ -64,7 +64,7 @@ jobs:
           echo -n '${{ secrets.GPG_PUB }}' > mvn_public_key.asc
           gpg --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
-          export GPG_TTY=$(tty)
+          
           mvn release:prepare -Dresume=false -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} -Prelease
           # mvn release:perform -Prelease -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
 
