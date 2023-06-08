@@ -59,11 +59,11 @@ jobs:
         GPG_PVT: ${{ secrets.GPG_PVT }}
         GPG_PUB: ${{ secrets.GPG_PUB }}
       run: |
-          cat ~/.m2/settings.xml
           export GPG_TTY=$(tty)
           echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
           echo -n '${{ secrets.GPG_PUB }}' > mvn_public_key.asc
           gpg --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
-          mvn -X release:prepare -Dresume=false -Prelease
-          mvn -X release:perform -Prelease
+
+          mvn release:prepare -Dresume=false -Prelease -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn release:perform -Prelease -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
