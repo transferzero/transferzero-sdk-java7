@@ -32,7 +32,7 @@ jobs:
     - name: Build
       env:
         GPG_PVT: ${{ secrets.GPG_PVT }}
-        GPG_PUB: ${{ vars.GPG_PUB }}
+        GPG_PUB: ${{ secrets.GPG_PUB }}
         REPO_TOKEN: ${{ secrets.OSSRH_TOKEN }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         SONATYPE_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -40,8 +40,7 @@ jobs:
       run: |
           export GPG_TTY=$(tty)
           echo -n '${{ secrets.GPG_PVT }}' > mvn_private_key.asc
-          echo -n '${{ vars.GPG_PUB }}' > mvn_public_key.asc
-          hexdump -C mvn_private_key.asc | head
+          echo -n '${{ secrets.GPG_PUB }}' > mvn_public_key.asc
           gpg2 --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
           mvn release:prepare -Dresume=false -Prelease
