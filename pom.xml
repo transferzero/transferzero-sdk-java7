@@ -211,7 +211,7 @@
                           <arg>--pinentry-mode</arg>
                           <arg>loopback</arg>
                       </gpgArguments>
-                      <useAgent>true</useAgent>
+                      <arguments>-Dgpg.passphrase=${env.GPG_PASSPHRASE}</arguments>
                   </configuration>
                 </execution>
               </executions>
