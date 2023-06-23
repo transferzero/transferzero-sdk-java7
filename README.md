@@ -45,7 +45,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.transferzero.sdk</groupId>
   <artifactId>transferzero-sdk-java7</artifactId>
-  <version>1.27.8-SNAPSHOT</version>
+  <version>1.27.9-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -317,6 +317,3 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
 ## Author
-
-
-
