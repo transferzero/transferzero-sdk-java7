@@ -45,7 +45,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.transferzero.sdk</groupId>
   <artifactId>transferzero-sdk-java7</artifactId>
-  <version>1.27.9-SNAPSHOT</version>
+  <version>1.28.0-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.transferzero.sdk:transferzero-sdk-java7:1.27.8-SNAPSHOT"
+compile "com.transferzero.sdk:transferzero-sdk-java7:1.28.0-SNAPSHOT"
 ```
 
 ### Others
@@ -68,7 +68,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/transferzero-sdk-java7-1.27.8-SNAPSHOT.jar`
+* `target/transferzero-sdk-java7-1.28.0-SNAPSHOT.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -317,3 +317,6 @@ apiClient.setBasePath("https://api-sandbox.transferzero.com/v1");
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
 ## Author
+
+
+
