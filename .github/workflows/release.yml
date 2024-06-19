@@ -66,6 +66,7 @@ jobs:
           echo -n '${{ secrets.GPG_PUB }}' > mvn_public_key.asc
           gpg --batch --import mvn_private_key.asc
           gpg --batch --import mvn_public_key.asc
+          gpg --list-keys
 
           mvn release:prepare -Dresume=false -Prelease
           mvn release:perform -Prelease
